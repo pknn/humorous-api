@@ -12,7 +12,6 @@
     "target": "es2018",
     "keepClassNames": true,
     "loose": true,
-    "baseUrl": "./",
     "paths": {}
   },
   "module": {
