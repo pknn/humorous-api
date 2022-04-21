@@ -5,6 +5,9 @@ describe('RGBBuilder', () => {
     const builder = new RGBBuilder()
     const result = builder.getRandomColor()
 
+    expect(result).toHaveProperty('type')
+    expect(result.type).toBe('RGB')
+
     expect(result).toHaveProperty('red')
     expect(result.red).toBeGreaterThanOrEqual(0)
     expect(result.red).toBeLessThanOrEqual(255)
@@ -23,6 +26,9 @@ describe('HSLBuilder', () => {
   it('should return HSL color with correct value range', () => {
     const builder = new HSLBuilder()
     const result = builder.getRandomColor()
+
+    expect(result).toHaveProperty('type')
+    expect(result.type).toBe('HSL')
 
     expect(result).toHaveProperty('hue')
     expect(result.hue).toBeGreaterThanOrEqual(0)

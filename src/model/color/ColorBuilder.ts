@@ -11,11 +11,11 @@ export class RGBBuilder extends ColorBuilder<RGB> {
   }
 
   getRandomColor(): RGB {
-    return {
-      red: this.getRandomRgbValue(),
-      green: this.getRandomRgbValue(),
-      blue: this.getRandomRgbValue(),
-    }
+    return new RGB(
+      this.getRandomRgbValue(),
+      this.getRandomRgbValue(),
+      this.getRandomRgbValue(),
+    )
   }
 }
 
@@ -25,11 +25,11 @@ export class HSLBuilder extends ColorBuilder<HSL> {
   }
 
   getRandomColor(): HSL {
-    return {
-      hue: getRandomNumber(0, 359),
-      saturation: this.getRandomPercentageValue(),
-      lightness: this.getRandomPercentageValue(),
-    }
+    return new HSL(
+      getRandomNumber(0, 359),
+      this.getRandomPercentageValue(),
+      this.getRandomPercentageValue(),
+    )
   }
 }
 
