@@ -1,3 +1,5 @@
+import { getRandomNumber } from '../../utils/random'
+
 export type ColorValue = number
 export const AvailableColorKeys = ['RGB', 'HSL'] as const
 export type AvailableColorKey = typeof AvailableColorKeys[number]
@@ -14,11 +16,15 @@ export class RGB extends Color {
   green: ColorValue
   blue: ColorValue
 
-  constructor(red: ColorValue, green: ColorValue, blue: ColorValue) {
+  private getRandomRgbValue(): ColorValue {
+    return getRandomNumber(0, 255)
+  }
+
+  constructor() {
     super('RGB')
-    this.red = red
-    this.green = green
-    this.blue = blue
+    this.red = this.getRandomRgbValue()
+    this.green = this.getRandomRgbValue()
+    this.blue = this.getRandomRgbValue()
   }
 }
 
@@ -27,12 +33,18 @@ export class HSL extends Color {
   saturation: ColorValue
   lightness: ColorValue
 
-  constructor(hue: ColorValue, saturation: ColorValue, lightness: ColorValue) {
+  private getRandomPercentageValue(): ColorValue {
+    return getRandomNumber(0, 100)
+  }
+
+  constructor() {
     super('HSL')
-    this.hue = hue
-    this.saturation = saturation
-    this.lightness = lightness
+    this.hue = getRandomNumber(0, 359)
+    this.saturation = this.getRandomPercentageValue()
+    this.lightness = this.getRandomPercentageValue()
   }
 }
 
 export type AvailableColor = RGB | HSL
+export type AC = typeof RGB | typeof HSL
+export const AvailableColors: AC[] = [RGB, HSL]
