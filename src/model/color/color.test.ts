@@ -1,43 +1,40 @@
 import { HSL, RGB } from './color'
 
 describe('RGB', () => {
+  const rgbProperties: (keyof RGB)[] = ['red', 'green', 'blue']
   it('should return RGB color with valid color range', () => {
     const color = new RGB()
 
     expect(color).toHaveProperty('type')
     expect(color.type).toBe('RGB')
 
-    expect(color).toHaveProperty('red')
-    expect(color.red).toBeGreaterThanOrEqual(0)
-    expect(color.red).toBeLessThanOrEqual(255)
-
-    expect(color).toHaveProperty('green')
-    expect(color.green).toBeGreaterThanOrEqual(0)
-    expect(color.green).toBeLessThanOrEqual(255)
-
-    expect(color).toHaveProperty('blue')
-    expect(color.blue).toBeGreaterThanOrEqual(0)
-    expect(color.blue).toBeLessThanOrEqual(255)
+    rgbProperties.forEach((property: keyof RGB) => {
+      expect(color).toHaveProperty(property)
+      expect(color[property]).toBeGreaterThanOrEqual(0)
+      expect(color[property]).toBeLessThanOrEqual(255)
+    })
   })
 })
 
 describe('HSL', () => {
+  const hslPropertiesRange: [keyof HSL, [number, number]][] = [
+    ['hue', [0, 359]],
+    ['saturation', [0, 100]],
+    ['lightness', [0, 100]],
+  ]
+
   it('should return HSL color with valid color range', () => {
     const color = new HSL()
 
     expect(color).toHaveProperty('type')
     expect(color.type).toBe('HSL')
 
-    expect(color).toHaveProperty('hue')
-    expect(color.hue).toBeGreaterThanOrEqual(0)
-    expect(color.hue).toBeLessThanOrEqual(359)
-
-    expect(color).toHaveProperty('saturation')
-    expect(color.saturation).toBeGreaterThanOrEqual(0)
-    expect(color.saturation).toBeLessThanOrEqual(100)
-
-    expect(color).toHaveProperty('lightness')
-    expect(color.lightness).toBeGreaterThanOrEqual(0)
-    expect(color.lightness).toBeLessThanOrEqual(100)
+    hslPropertiesRange.forEach((propertyRange) => {
+      expect(color).toHaveProperty(propertyRange[0])
+      expect(color[propertyRange[0]]).toBeGreaterThanOrEqual(
+        propertyRange[1][0],
+      )
+      expect(color[propertyRange[0]]).toBeLessThanOrEqual(propertyRange[1][1])
+    })
   })
 })
