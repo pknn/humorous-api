@@ -1,6 +1,6 @@
 export type ColorValue = number
-export type AvailableColorKey = 'RGB' | 'HSL'
-export const AvailableColorKeys: AvailableColorKey[] = ['RGB', 'HSL']
+export const AvailableColorKeys = ['RGB', 'HSL'] as const
+export type AvailableColorKey = typeof AvailableColorKeys[number]
 
 export class Color {
   type: AvailableColorKey
