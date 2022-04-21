@@ -1,18 +1,5 @@
 import { getRandomNumber } from '../../utils/random'
-
-type ColorValue = number
-interface Color {}
-interface RGB extends Color {
-  red: ColorValue
-  green: ColorValue
-  blue: ColorValue
-}
-
-interface HSL extends Color {
-  hue: ColorValue
-  saturation: ColorValue
-  lightness: ColorValue
-}
+import { Color, ColorValue, HSL, RGB } from './color'
 
 export abstract class ColorBuilder<T extends Color> {
   abstract getRandomColor(): T
