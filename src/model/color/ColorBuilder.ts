@@ -1,3 +1,5 @@
+import { getRandomNumber } from '../../utils/random'
+
 type ColorValue = number
 interface Color {}
 interface RGB extends Color {
@@ -17,21 +19,29 @@ export abstract class ColorBuilder<T extends Color> {
 }
 
 export class RGBBuilder extends ColorBuilder<RGB> {
+  private getRandomRgbValue(): ColorValue {
+    return getRandomNumber(0, 255)
+  }
+
   getRandomColor(): RGB {
     return {
-      red: 100,
-      green: 100,
-      blue: 100,
+      red: this.getRandomRgbValue(),
+      green: this.getRandomRgbValue(),
+      blue: this.getRandomRgbValue(),
     }
   }
 }
 
 export class HSLBuilder extends ColorBuilder<HSL> {
+  private getRandomPercentageValue(): ColorValue {
+    return getRandomNumber(0, 100)
+  }
+
   getRandomColor(): HSL {
     return {
-      hue: 200,
-      saturation: 100,
-      lightness: 100,
+      hue: getRandomNumber(0, 359),
+      saturation: this.getRandomPercentageValue(),
+      lightness: this.getRandomPercentageValue(),
     }
   }
 }
