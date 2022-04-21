@@ -11,3 +11,5 @@ export interface HSL extends Color {
   saturation: ColorValue
   lightness: ColorValue
 }
+
+export type AvailableColor = RGB | HSL

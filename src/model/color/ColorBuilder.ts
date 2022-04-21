@@ -1,5 +1,5 @@
 import { getRandomNumber } from '../../utils/random'
-import { Color, ColorValue, HSL, RGB } from './color'
+import { AvailableColor, Color, ColorValue, HSL, RGB } from './color'
 
 export abstract class ColorBuilder<T extends Color> {
   abstract getRandomColor(): T
@@ -32,3 +32,8 @@ export class HSLBuilder extends ColorBuilder<HSL> {
     }
   }
 }
+
+export const AvailableColorBuilders: ColorBuilder<AvailableColor>[] = [
+  new RGBBuilder(),
+  new HSLBuilder(),
+]
