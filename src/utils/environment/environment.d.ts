@@ -1,4 +1,7 @@
+export type Host = string
+export type Port = number
+
 export interface Environment {
-  host: string
-  port: number
+  host: Host
+  port: Port
 }
