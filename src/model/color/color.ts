@@ -6,42 +6,32 @@ export type AvailableColorKey = typeof AvailableColorKeys[number]
 
 export class Color {
   type: AvailableColorKey
-  constructor(type: AvailableColorKey) {
+  components: ColorValue[]
+  constructor(type: AvailableColorKey, ...components: ColorValue[]) {
     this.type = type
+    this.components = components
   }
 }
 
 export class RGB extends Color {
-  red: ColorValue
-  green: ColorValue
-  blue: ColorValue
-
-  private getRandomRgbValue(): ColorValue {
-    return getRandomNumber(0, 255)
-  }
-
   constructor() {
-    super('RGB')
-    this.red = this.getRandomRgbValue()
-    this.green = this.getRandomRgbValue()
-    this.blue = this.getRandomRgbValue()
+    super(
+      'RGB',
+      getRandomNumber(0, 255),
+      getRandomNumber(0, 255),
+      getRandomNumber(0, 255),
+    )
   }
 }
 
 export class HSL extends Color {
-  hue: ColorValue
-  saturation: ColorValue
-  lightness: ColorValue
-
-  private getRandomPercentageValue(): ColorValue {
-    return getRandomNumber(0, 100)
-  }
-
   constructor() {
-    super('HSL')
-    this.hue = getRandomNumber(0, 359)
-    this.saturation = this.getRandomPercentageValue()
-    this.lightness = this.getRandomPercentageValue()
+    super(
+      'HSL',
+      getRandomNumber(0, 359),
+      getRandomNumber(0, 100),
+      getRandomNumber(0, 100),
+    )
   }
 }
 
