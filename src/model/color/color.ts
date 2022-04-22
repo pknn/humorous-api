@@ -13,7 +13,7 @@ export interface ColorComponent {
 export const AvailableColorKeys = ['RGB', 'HSL'] as const
 export type AvailableColorKey = typeof AvailableColorKeys[number]
 
-export class Color {
+export abstract class Color {
   type: AvailableColorKey
   components: ColorComponent[]
 
@@ -69,5 +69,4 @@ export class HSL extends Color {
   }
 }
 
-export type AvailableColor = typeof RGB | typeof HSL
-export const AvailableColors: AvailableColor[] = [RGB, HSL]
+export const AvailableColors = [RGB, HSL]
