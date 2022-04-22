@@ -1,0 +1,1 @@
+export { getColorPresenter } from './color'
