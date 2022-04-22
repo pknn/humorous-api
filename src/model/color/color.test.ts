@@ -28,7 +28,7 @@ describe('HSL', () => {
   ]
 
   it('should return HSL color with valid color range', () => {
-    const color = new HSL()
+    const color = HSL.getRandomColor()
 
     expect(color).toHaveProperty('type')
     expect(color.type).toBe('HSL')
