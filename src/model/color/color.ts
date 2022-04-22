@@ -24,47 +24,37 @@ export abstract class Color {
 }
 
 export class RGB extends Color {
-  constructor(...colorComponents: ColorComponent[]) {
-    super('RGB', ...colorComponents)
+  constructor(...colorValues: [ColorValue, ColorValue, ColorValue]) {
+    super(
+      'RGB',
+      ...colorValues.map((value) => ({ unit: ColorUnit.Literal, value })),
+    )
   }
 
   static getRandomColor() {
     return new RGB(
-      {
-        unit: ColorUnit.Literal,
-        value: getRandomNumber(0, 255),
-      },
-      {
-        unit: ColorUnit.Literal,
-        value: getRandomNumber(0, 255),
-      },
-      {
-        unit: ColorUnit.Literal,
-        value: getRandomNumber(0, 255),
-      },
+      getRandomNumber(0, 255),
+      getRandomNumber(0, 255),
+      getRandomNumber(0, 255),
     )
   }
 }
 
 export class HSL extends Color {
-  constructor(...colorComponents: ColorComponent[]) {
-    super('HSL', ...colorComponents)
+  constructor(...colorValues: [ColorValue, ColorValue, ColorValue]) {
+    super(
+      'HSL',
+      { unit: ColorUnit.Literal, value: colorValues[0] },
+      { unit: ColorUnit.Percentage, value: colorValues[1] },
+      { unit: ColorUnit.Percentage, value: colorValues[2] },
+    )
   }
 
   static getRandomColor() {
     return new HSL(
-      {
-        unit: ColorUnit.Literal,
-        value: getRandomNumber(0, 359),
-      },
-      {
-        unit: ColorUnit.Percentage,
-        value: getRandomNumber(0, 100),
-      },
-      {
-        unit: ColorUnit.Percentage,
-        value: getRandomNumber(0, 100),
-      },
+      getRandomNumber(0, 359),
+      getRandomNumber(0, 100),
+      getRandomNumber(0, 100),
     )
   }
 }
