@@ -5,45 +5,66 @@ export enum ColorUnit {
   Literal = '',
   Percentage = '%',
 }
+export interface ColorComponent {
+  value: ColorValue
+  unit: ColorUnit
+}
+
 export const AvailableColorKeys = ['RGB', 'HSL'] as const
 export type AvailableColorKey = typeof AvailableColorKeys[number]
 
 export class Color {
   type: AvailableColorKey
-  units: ColorUnit[]
-  components: ColorValue[]
+  components: ColorComponent[]
 
-  constructor(
-    type: AvailableColorKey,
-    units: ColorUnit[],
-    ...components: ColorValue[]
-  ) {
+  constructor(type: AvailableColorKey, ...colorComponents: ColorComponent[]) {
     this.type = type
-    this.units = units
-    this.components = components
+    this.components = colorComponents
   }
 }
 
 export class RGB extends Color {
-  constructor() {
-    super(
-      'RGB',
-      [ColorUnit.Literal, ColorUnit.Literal, ColorUnit.Literal],
-      getRandomNumber(0, 255),
-      getRandomNumber(0, 255),
-      getRandomNumber(0, 255),
+  constructor(...colorComponents: ColorComponent[]) {
+    super('RGB', ...colorComponents)
+  }
+
+  static getRandomColor() {
+    return new RGB(
+      {
+        unit: ColorUnit.Literal,
+        value: getRandomNumber(0, 255),
+      },
+      {
+        unit: ColorUnit.Literal,
+        value: getRandomNumber(0, 255),
+      },
+      {
+        unit: ColorUnit.Literal,
+        value: getRandomNumber(0, 255),
+      },
     )
   }
 }
 
 export class HSL extends Color {
-  constructor() {
-    super(
-      'HSL',
-      [ColorUnit.Literal, ColorUnit.Percentage, ColorUnit.Percentage],
-      getRandomNumber(0, 359),
-      getRandomNumber(0, 100),
-      getRandomNumber(0, 100),
+  constructor(...colorComponents: ColorComponent[]) {
+    super('HSL', ...colorComponents)
+  }
+
+  static getRandomColor() {
+    return new HSL(
+      {
+        unit: ColorUnit.Literal,
+        value: getRandomNumber(0, 359),
+      },
+      {
+        unit: ColorUnit.Percentage,
+        value: getRandomNumber(0, 100),
+      },
+      {
+        unit: ColorUnit.Percentage,
+        value: getRandomNumber(0, 100),
+      },
     )
   }
 }

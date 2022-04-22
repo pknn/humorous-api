@@ -9,10 +9,7 @@ export interface ColorPresenter {
 export const getColorPresenter = ({
   type,
   components,
-  units,
 }: Color): ColorPresenter => ({
   type,
-  components: components.map(
-    (component, index) => `${component}${units[index]}`,
-  ),
+  components: components.map(({ value, unit }) => `${value}${unit}`),
 })

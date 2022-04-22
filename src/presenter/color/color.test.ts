@@ -11,7 +11,7 @@ describe('getColorPresenter', () => {
 
       presenter.components.forEach((component, index) => {
         expect(component).toBe(
-          `${color.components[index]}${color.units[index]}`,
+          `${color.components[index]?.value}${color.components[index]?.value}`,
         )
       })
     },

@@ -2,26 +2,26 @@ import { ColorUnit, HSL, RGB } from './color'
 
 describe('RGB', () => {
   it('should return RGB color with valid color range', () => {
-    const color = new RGB()
+    const color = RGB.getRandomColor()
 
     expect(color).toHaveProperty('type')
     expect(color.type).toBe('RGB')
 
-    expect(color.units).toStrictEqual([
-      ColorUnit.Literal,
-      ColorUnit.Literal,
-      ColorUnit.Literal,
-    ])
-
-    color.components.forEach((component) => {
-      expect(component).toBeGreaterThanOrEqual(0)
-      expect(component).toBeLessThanOrEqual(255)
+    color.components.forEach(({ unit, value }) => {
+      expect(unit).toBe(ColorUnit.Literal)
+      expect(value).toBeGreaterThanOrEqual(0)
+      expect(value).toBeLessThanOrEqual(255)
     })
   })
 })
 
 describe('HSL', () => {
-  const hslRange: [number, number][] = [
+  const hslUnits: ColorUnit[] = [
+    ColorUnit.Literal,
+    ColorUnit.Percentage,
+    ColorUnit.Percentage,
+  ]
+  const hslRanges: [number, number][] = [
     [0, 359],
     [0, 100],
     [0, 100],
@@ -33,15 +33,10 @@ describe('HSL', () => {
     expect(color).toHaveProperty('type')
     expect(color.type).toBe('HSL')
 
-    expect(color.units).toStrictEqual([
-      ColorUnit.Literal,
-      ColorUnit.Percentage,
-      ColorUnit.Percentage,
-    ])
-
-    color.components.forEach((component, index) => {
-      expect(component).toBeGreaterThanOrEqual(hslRange[index]![0])
-      expect(component).toBeLessThanOrEqual(hslRange[index]![1])
+    color.components.forEach(({ unit, value }, index) => {
+      expect(unit).toBe(hslUnits[index])
+      expect(value).toBeGreaterThanOrEqual(hslRanges[index]![0])
+      expect(value).toBeLessThanOrEqual(hslRanges[index]![1])
     })
   })
 })
